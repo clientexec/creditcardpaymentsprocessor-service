@@ -25,6 +25,11 @@ class PluginCreditcardpaymentsprocessor extends ServicePlugin
                 'description'   => /*T*/'When enabled, will process your customer\'s credit cards for invoices that are due or past-due. This will only process your customers whose credit card is stored outside of ClientExec.'/*/T*/,
                 'value'         => '0',
             ),
+            /*T*/'Include invoices previously declined'/*/T*/       => array(
+                'type'          => 'yesno',
+                'description'   => /*T*/'When enabled, will also process your customer\'s credit cards for invoices that are due or past-due and have declined transactions.'/*/T*/,
+                'value'         => '0',
+            ),
             /*T*/'Run schedule - Minute'/*/T*/  => array(
                 'type'          => 'text',
                 'description'   => /*T*/'Enter number, range, list or steps'/*/T*/,
@@ -63,8 +68,9 @@ class PluginCreditcardpaymentsprocessor extends ServicePlugin
 
         $billingGateway = new BillingGateway($this->user);
         $initial = 0;
+        $includeDeclined = $this->settings->get('plugin_creditcardpaymentsprocessor_Include invoices previously declined');
         $passphrase = '';
-        $billingGateway->process_invoice($initial, $passphrase);
+        $billingGateway->process_invoice($initial, $includeDeclined, $passphrase);
         if (isset($this->session->all_invoices)){
               $numCustomers = count($this->session->all_invoices);
         }
