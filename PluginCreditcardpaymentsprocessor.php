@@ -11,6 +11,7 @@ class PluginCreditcardpaymentsprocessor extends ServicePlugin
 {
     protected $featureSet = 'billing';
     public $hasPendingItems = true;
+    public $permission = 'billing_view';
 
     function getVariables()
     {
