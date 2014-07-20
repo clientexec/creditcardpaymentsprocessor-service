@@ -78,7 +78,7 @@ class PluginCreditcardpaymentsprocessor extends ServicePlugin
         }
         $billingGateway->send_process_invoice_summary("process");
 
-        //$this->settings->updateValue("LastDateGenerateInvoices", time());
+        $this->settings->updateValue("LastDateRunBatch", time());
 
         array_unshift($messages, "$numCustomers customer(s) were charged");
         return $messages;
