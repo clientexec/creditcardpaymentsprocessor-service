@@ -70,9 +70,8 @@ class PluginCreditcardpaymentsprocessor extends ServicePlugin
         $billingGateway = new BillingGateway($this->user);
         $initial = 0;
         $includeDeclined = $this->settings->get('plugin_creditcardpaymentsprocessor_Include invoices previously declined');
-        $passphrase = '';
         $allAtOnce = true;
-        $billingGateway->process_invoice($initial, $includeDeclined, $passphrase, $allAtOnce);
+        $billingGateway->process_invoice($initial, $includeDeclined, '', $allAtOnce);
         if (isset($this->session->all_invoices)){
               $numCustomers = count($this->session->all_invoices);
         }
